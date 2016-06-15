@@ -16,14 +16,14 @@ You can find out more about wifi management frames e.g. [here](http://www.wi-fip
 4. Connect to internet and perform update  
       ```sh sudo apt-get update```  
       ```sh sudo apt-get dist-upgrade```  
-5. Install required software:
-    ```sh sudo apt-get install python-pip dnsmasq lighttpd hostapd tcpdump rfkill aircrack-ng```
-    ```sh sudo pip install scapy```
-6. Configure wlan0 to be the local wifi access point
-    ```sh sudo mv /etc/dnsmasq.conf /etc/dnsmasq.conf.original```
-    ```sh sudo nano /etc/dnsmasq.conf```
-      interface=wlan0
-      dhcp-range=192.168.8.100,192.168.8.120,12h
+5. Install required software:  
+      ```sh sudo apt-get install python-pip dnsmasq lighttpd hostapd tcpdump rfkill aircrack-ng```  
+      ```sh sudo pip install scapy```  
+6. Configure wlan0 to be the local wifi access point  
+      ```sh sudo mv /etc/dnsmasq.conf /etc/dnsmasq.conf.original```  
+      ```sh sudo nano /etc/dnsmasq.conf```  
+          *interface=wlan0*
+          *dhcp-range=192.168.8.100,192.168.8.120,12h*
     ```sh sudo nano /etc/hostapd/hostapd.conf```
       interface=wlan0
       driver=nl80211
