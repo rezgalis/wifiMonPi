@@ -22,29 +22,29 @@ You can find out more about wifi management frames e.g. [here](http://www.wi-fip
 6. Configure wlan0 to be the local wifi access point  
       ```sh sudo mv /etc/dnsmasq.conf /etc/dnsmasq.conf.original```  
       ```sh sudo nano /etc/dnsmasq.conf```  
-          *interface=wlan0*
-          *dhcp-range=192.168.8.100,192.168.8.120,12h*
-    ```sh sudo nano /etc/hostapd/hostapd.conf```
-      interface=wlan0
-      driver=nl80211
-      ssid=<ANY SSID NAME>
-      hw_mode=g
-      channel=6
-      auth_algs=1
-      wpa=2
-      wpa_key_mgmt=WPA-PSK
-      wpa_passphrase=<ANY PASSWORD 8chars at least>
-      rsn_pairwise=CCMP
-    ```sh sudo nano /etc/network/interfaces```
-      auto wlan0
-      iface wlan0 inet static
-      hostapd /etc/hostapd/hostapd.conf
-      address 192.168.8.1
-      netmask 255.255.255.0
-      allow-hotplug wlan1
-      #iface wlan1 inet manual
-      #    wpa-conf /etc/wpa_supplicant/wpa_supplicant.conf
-    ```sh sudo reboot```   <-after this you should see your wifi access point and should be able to connect to it. Entering 192.168.8.1 in browser should open sample webpage for lighttpd
+            *interface=wlan0*  
+            *dhcp-range=192.168.8.100,192.168.8.120,12h*  
+      ```sh sudo nano /etc/hostapd/hostapd.conf```  
+        *interface=wlan0*  
+        *driver=nl80211*  
+        *ssid=<ANY SSID NAME>*  
+        *hw_mode=g*  
+        *channel=6*  
+        *auth_algs=1*  
+        *wpa=2*  
+        *wpa_key_mgmt=WPA-PSK*  
+        *wpa_passphrase=<ANY PASSWORD 8chars at least>*  
+        *rsn_pairwise=CCMP*  
+      ```sh sudo nano /etc/network/interfaces```  
+        *auto wlan0*  
+        *iface wlan0 inet static*  
+        *hostapd /etc/hostapd/hostapd.conf*  
+        *address 192.168.8.1*  
+        *netmask 255.255.255.0*  
+        *allow-hotplug wlan1*  
+        *#iface wlan1 inet manual*  
+        *#wpa-conf /etc/wpa_supplicant/wpa_supplicant.conf*  
+      ```sh sudo reboot```   <-after this you should see your wifi access point and should be able to connect to it. Entering 192.168.8.1 in browser should open sample webpage for lighttpd  
 7. (optional) Enable directory listing in webserver
     ```sh sudo nano /etc/lighttpd/lighttpd.conf```
       server.dir-listing = "enable"
