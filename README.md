@@ -1,9 +1,7 @@
 # wifiMonPi
 
-Python script (and some supporting shell scripts) is intended for monitoring nearby wi-fi networks and devices. Script monitors for beacon frames and beacon responses from wifi access points, and also monitors nearby devices sending probe requests (that's what mobile phones usually do and by doing this disclose all possible access points it would try to connect to) and nearby connected devices.
-
-The script was built to work on Raspberry Pi model 3 ver B which has built-in wifi (used for local AP - for accessing logs, visualisation webpage and for management through ssh) and an extra wifi adapter which is then set in monitor mode to sniff wi-fi frames.
-
+Python script (and some supporting shell scripts) is intended for monitoring nearby wi-fi networks and devices. Script monitors for beacon frames and beacon responses from wifi access points, and also monitors nearby devices sending probe requests (that's what mobile phones usually do and by doing this disclose all possible access points it would try to connect to) and nearby connected devices.  
+The script was built to work on Raspberry Pi model 3 ver B which has built-in wifi (used for local AP - for accessing logs, visualisation webpage and for management through ssh) and an extra wifi adapter which is then set in monitor mode to sniff wi-fi frames.  
 Log files are saved to /var/www directory and can be displayed nicely using lighttpd and [jQuery-CSV](https://github.com/evanplaice/jquery-csv).
 
 You can find out more about wifi management frames e.g. [here](http://www.wi-fiplanet.com/tutorials/article.php/1447501/Understanding-80211-Frame-Types.htm).
@@ -45,24 +43,24 @@ You can find out more about wifi management frames e.g. [here](http://www.wi-fip
         *#iface wlan1 inet manual*  
         *#wpa-conf /etc/wpa_supplicant/wpa_supplicant.conf*  
       ```sh sudo reboot```   <-after this you should see your wifi access point and should be able to connect to it. Entering 192.168.8.1 in browser should open sample webpage for lighttpd  
-7. (optional) Enable directory listing in webserver
-    ```sh sudo nano /etc/lighttpd/lighttpd.conf```
-      server.dir-listing = "enable"
-8. Copy contents of "html" folder from this repository to lighttpd webserver folder
-    ```sh sudo mv index.html /var/www/html```
-    ```sh sudo mv wifilog /var/www/html```
-    ```sh sudo chmod u=rw,o=r index.html```
-    ```sh sudo chmod 0755 wifilog/ -R```
-9. Copy contents of "scripts" folder from this repository to folder "wifi-sniffer" in your home folder and chmod those scripts
-    ```sh sudo chmod +x /home/pi/wifi-sniffer/update-time.sh```
-    ```sh sudo chmod +x /home/pi/wifi-sniffer/wifi-sniffer.sh```
+7. Enable directory listing in webserver  
+      ```sh sudo nano /etc/lighttpd/lighttpd.conf```  
+        *server.dir-listing = "enable"*  
+8. Copy contents of "html" folder from this repository to lighttpd webserver folder  
+      ```sh sudo mv index.html /var/www/html```  
+      ```sh sudo mv wifilog /var/www/html```  
+      ```sh sudo chmod u=rw,o=r index.html```  
+      ```sh sudo chmod 0755 wifilog/ -R```  
+9. Copy contents of "scripts" folder from this repository to folder "wifi-sniffer" in your home folder and chmod those scripts  
+      ```sh sudo chmod +x /home/pi/wifi-sniffer/update-time.sh```  
+      ```sh sudo chmod +x /home/pi/wifi-sniffer/wifi-sniffer.sh```  
 
 
 ### Getting results and reviewing them
 
 Optionally you can adjust time on your RasPi by running ```sh /home/pi/update-time.sh``` - follow instructions on screen
 
-To start wifi-sniffer automatically (and in background), just run ```sh /home/pi/wifi-sniffer.sh``` 
+To start wifi-sniffer automatically (and in background), just run ```sh /home/pi/wifi-sniffer.sh```  
 Results will be output to /var/www/html/wifilog/data directory (you can ajdust line 18 in wifi-sniffer.py to change this)
 
 Alternatively, just run ```sh sudo python wifi-sniffer.py``` and follow instructions. Please note you might have to perform actions to put interface in monitor mode and unblock wifi before this works nicely.
