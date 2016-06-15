@@ -3,14 +3,16 @@
 Python script (and some supporting shell scripts) is intended for monitoring nearby wi-fi networks and devices. Script monitors for beacon frames and beacon responses from wifi access points, and also monitors nearby devices sending probe requests (that's what mobile phones usually do and by doing this disclose all possible access points it would try to connect to) and nearby connected devices.
 
 The script was built to work on Raspberry Pi model 3 ver B which has built-in wifi (used for local AP - for accessing logs, visualisation webpage and for management through ssh) and an extra wifi adapter which is then set in monitor mode to sniff wi-fi frames.
-Log files are saved to /var/www directory and can be displayed nicely using lighttpd and jQuery-CSV (https://github.com/evanplaice/jquery-csv).
-You can find out more about wifi management frames e.g. here: http://www.wi-fiplanet.com/tutorials/article.php/1447501/Understanding-80211-Frame-Types.htm
+
+Log files are saved to /var/www directory and can be displayed nicely using lighttpd and [jQuery-CSV](https://github.com/evanplaice/jquery-csv).
+
+You can find out more about wifi management frames e.g. [here](http://www.wi-fiplanet.com/tutorials/article.php/1447501/Understanding-80211-Frame-Types.htm).
 
 
-## Full setup instructions
-1. Format SD card, copy NOOBS to it (https://www.raspberrypi.org/downloads/noobs/)
+### Full setup instructions
+1. Format SD card, copy [NOOBS](https://www.raspberrypi.org/downloads/noobs/) to it
 2. Plug in SD card into RasPi, install Raspbian.
-3. Change timezone, locale, admin password, enable ssh access, configure to boot to console with password (all through "sudo raspi-config")
+3. Change timezone, locale, admin password, enable ssh access, configure to boot to console with password (all through ```sh sudo raspi-config```)
 4. Connect to internet and perform update 
     sudo apt-get update
     sudo apt-get dist-upgrade
@@ -56,7 +58,7 @@ You can find out more about wifi management frames e.g. here: http://www.wi-fipl
     sudo chmod +x /home/pi/wifi-sniffer/wifi-sniffer.sh
 
 
-## Getting results and reviewing them
+### Getting results and reviewing them
 
 Optionally you can adjust time on your RasPi by running /home/pi/update-time.sh - follow instructions on screen
 
@@ -67,4 +69,4 @@ Alternatively, just run sudo python wifi-sniffer.py and follow instructions. Ple
 
 To monitor for rogue APs (someone pretending to be your wifi network), change line 17 in wifi-sniffer.py accordingly.
 
-To view results, connect to your wifi access point (set up on step 6 before) and navigate to 192.168.1.1. First, download the file you want to examine and then open any of the CSV parser links and enjoy.
+To view results, connect to your wifi access point (set up on step 6 before) and navigate to 192.168.8.1. First, download the file you want to examine and then open any of the CSV parser links and enjoy.
