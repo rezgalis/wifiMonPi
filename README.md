@@ -14,17 +14,17 @@ You can find out more about wifi management frames e.g. [here](http://www.wi-fip
 2. Plug in SD card into RasPi, install Raspbian.
 3. Change timezone, locale, admin password, enable ssh access, configure to boot to console with password (all through ```sh sudo raspi-config```)
 4. Connect to internet and perform update 
-    sudo apt-get update
-    sudo apt-get dist-upgrade
+    ```sh sudo apt-get update```
+    ```sh sudo apt-get dist-upgrade```
 5. Install required software:
-    sudo apt-get install python-pip dnsmasq lighttpd hostapd tcpdump rfkill aircrack-ng
-    sudo pip install scapy
+    ```sh sudo apt-get install python-pip dnsmasq lighttpd hostapd tcpdump rfkill aircrack-ng```
+    ```sh sudo pip install scapy```
 6. Configure wlan0 to be the local wifi access point
-    sudo mv /etc/dnsmasq.conf /etc/dnsmasq.conf.original
-    sudo nano /etc/dnsmasq.conf
+    ```sh sudo mv /etc/dnsmasq.conf /etc/dnsmasq.conf.original```
+    ```sh sudo nano /etc/dnsmasq.conf```
       interface=wlan0
       dhcp-range=192.168.8.100,192.168.8.120,12h
-    sudo nano /etc/hostapd/hostapd.conf
+    ```sh sudo nano /etc/hostapd/hostapd.conf```
       interface=wlan0
       driver=nl80211
       ssid=<ANY SSID NAME>
@@ -35,7 +35,7 @@ You can find out more about wifi management frames e.g. [here](http://www.wi-fip
       wpa_key_mgmt=WPA-PSK
       wpa_passphrase=<ANY PASSWORD 8chars at least>
       rsn_pairwise=CCMP
-    sudo nano /etc/network/interfaces
+    ```sh sudo nano /etc/network/interfaces```
       auto wlan0
       iface wlan0 inet static
       hostapd /etc/hostapd/hostapd.conf
@@ -44,28 +44,28 @@ You can find out more about wifi management frames e.g. [here](http://www.wi-fip
       allow-hotplug wlan1
       #iface wlan1 inet manual
       #    wpa-conf /etc/wpa_supplicant/wpa_supplicant.conf
-    sudo reboot   <-after this you should see your wifi access point and should be able to connect to it. Entering 192.168.1.1 in browser should open sample webpage for lighttpd
+    ```sh sudo reboot```   <-after this you should see your wifi access point and should be able to connect to it. Entering 192.168.8.1 in browser should open sample webpage for lighttpd
 7. (optional) Enable directory listing in webserver
-    sudo nano /etc/lighttpd/lighttpd.conf
+    ```sh sudo nano /etc/lighttpd/lighttpd.conf```
       server.dir-listing = "enable"
 8. Copy contents of "html" folder from this repository to lighttpd webserver folder
-    sudo mv index.html /var/www/html
-    sudo mv wifilog /var/www/html
-    sudo chmod u=rw,o=r index.hhtml
-    sudo chmod 0755 wifilog/ -R
+    ```sh sudo mv index.html /var/www/html```
+    ```sh sudo mv wifilog /var/www/html```
+    ```sh sudo chmod u=rw,o=r index.html```
+    ```sh sudo chmod 0755 wifilog/ -R```
 9. Copy contents of "scripts" folder from this repository to folder "wifi-sniffer" in your home folder and chmod those scripts
-    sudo chmod +x /home/pi/wifi-sniffer/update-time.sh
-    sudo chmod +x /home/pi/wifi-sniffer/wifi-sniffer.sh
+    ```sh sudo chmod +x /home/pi/wifi-sniffer/update-time.sh```
+    ```sh sudo chmod +x /home/pi/wifi-sniffer/wifi-sniffer.sh```
 
 
 ### Getting results and reviewing them
 
-Optionally you can adjust time on your RasPi by running /home/pi/update-time.sh - follow instructions on screen
+Optionally you can adjust time on your RasPi by running ```sh /home/pi/update-time.sh``` - follow instructions on screen
 
-To start wifi-sniffer automatically (and in background), just run /home/pi/wifi-sniffer.sh 
+To start wifi-sniffer automatically (and in background), just run ```sh /home/pi/wifi-sniffer.sh``` 
 Results will be output to /var/www/html/wifilog/data directory (you can ajdust line 18 in wifi-sniffer.py to change this)
 
-Alternatively, just run sudo python wifi-sniffer.py and follow instructions. Please note you might have to perform actions to put interface in monitor mode and unblock wifi before this works nicely.
+Alternatively, just run ```sh sudo python wifi-sniffer.py``` and follow instructions. Please note you might have to perform actions to put interface in monitor mode and unblock wifi before this works nicely.
 
 To monitor for rogue APs (someone pretending to be your wifi network), change line 17 in wifi-sniffer.py accordingly.
 
