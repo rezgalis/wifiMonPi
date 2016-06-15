@@ -14,7 +14,7 @@ You can find out more about wifi management frames e.g. here: http://www.wi-fipl
     sudo apt-get update
     sudo apt-get dist-upgrade
 5. Install required software:
-    sudo apt-get install python-pip dnsmasq lighttpd hostapd
+    sudo apt-get install python-pip dnsmasq lighttpd hostapd tcpdump rfkill aircrack-ng
     sudo pip install scapy
 6. Configure wlan0 to be the local wifi access point
     sudo mv /etc/dnsmasq.conf /etc/dnsmasq.conf.original
@@ -45,3 +45,25 @@ You can find out more about wifi management frames e.g. here: http://www.wi-fipl
 7. (optional) Enable directory listing in webserver
     sudo nano /etc/lighttpd/lighttpd.conf
       server.dir-listing = "enable"
+8. Copy contents of "html" folder from this repository to lighttpd webserver folder
+    sudo mv index.html /var/www/html
+    sudo mv wifilog /var/www/html
+    sudo chmod u=rw,o=r index.hhtml
+    sudo chmod 0755 wifilog/ -R
+9. Copy contents of "scripts" folder from this repository to folder "wifi-sniffer" in your home folder and chmod those scripts
+    sudo chmod +x /home/pi/wifi-sniffer/update-time.sh
+    sudo chmod +x /home/pi/wifi-sniffer/wifi-sniffer.sh
+
+
+## Getting results and reviewing them
+
+Optionally you can adjust time on your RasPi by running /home/pi/update-time.sh - follow instructions on screen
+
+To start wifi-sniffer automatically (and in background), just run /home/pi/wifi-sniffer.sh 
+Results will be output to /var/www/html/wifilog/data directory (you can ajdust line 18 in wifi-sniffer.py to change this)
+
+Alternatively, just run sudo python wifi-sniffer.py and follow instructions. Please note you might have to perform actions to put interface in monitor mode and unblock wifi before this works nicely.
+
+To monitor for rogue APs (someone pretending to be your wifi network), change line 17 in wifi-sniffer.py accordingly.
+
+To view results, connect to your wifi access point (set up on step 6 before) and navigate to 192.168.1.1. First, download the file you want to examine and then open any of the CSV parser links and enjoy.
