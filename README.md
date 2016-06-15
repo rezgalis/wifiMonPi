@@ -20,7 +20,7 @@ You can find out more about wifi management frames e.g. here: http://www.wi-fipl
     sudo mv /etc/dnsmasq.conf /etc/dnsmasq.conf.original
     sudo nano /etc/dnsmasq.conf
       interface=wlan0
-      dhcp-range=192.168.1.100,192.168.1.120,12h
+      dhcp-range=192.168.8.100,192.168.8.120,12h
     sudo nano /etc/hostapd/hostapd.conf
       interface=wlan0
       driver=nl80211
