@@ -14,8 +14,8 @@ You can find out more about wifi management frames e.g. [here](http://www.wi-fip
 2. Plug in SD card into RasPi, install Raspbian.
 3. Change timezone, locale, admin password, enable ssh access, configure to boot to console with password (all through ```sh sudo raspi-config```)
 4. Connect to internet and perform update  
-    ```sh sudo apt-get update```  
-    ```sh sudo apt-get dist-upgrade```  
+      ```sh sudo apt-get update```  
+      ```sh sudo apt-get dist-upgrade```  
 5. Install required software:
     ```sh sudo apt-get install python-pip dnsmasq lighttpd hostapd tcpdump rfkill aircrack-ng```
     ```sh sudo pip install scapy```
