@@ -1,1 +1,2 @@
-These are all standard libraries for jQuery, Google Visualisations API and jQuery-CSV. All have been included locally because device running wifi sniffer might not have internet access at all.
+These are all standard libraries for jQuery and jQuery-CSV. All have been included locally because device running wifi sniffer might not have internet access at all.
+Google Visualization API may not be used offline, so make sure you have internet access if running pretty-print CSV option on webserver
